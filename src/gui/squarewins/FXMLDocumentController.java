@@ -13,6 +13,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.AnchorPane;
@@ -141,33 +144,50 @@ public class FXMLDocumentController implements Initializable {
 
         if (source.isSelected()) {
             selectedPoints.add(point);
-            System.out.println("Koordinate: " + point.getX() + "|" + point.getY());
-
+            int x=(int) ((point.getX()-86)/20),y = (int) ((point.getY()-87)/20);
+            System.out.println("Koordinate: " + x + "|" + y);
+            
             if (red) {
                 source.setStyle("-fx-mark-color: red;");
                 System.out.println("red");
-                sw.addPoint(new ch.kbw.Model.Point((int) point.getX(), (int) point.getY(), red));
-                
+                sw.addPoint(new ch.kbw.Model.Point(x, y, !red));
+
                 //redPoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                sw.buildSquare(red);
+                if(sw.buildSquare(!red)){
+                    msg("RED");
+                }
                 //algorithm(red);
                 red = false;
             } else {
                 source.setStyle("-fx-mark-color: blue;");
                 System.out.println("blue");
-                sw.addPoint(new ch.kbw.Model.Point((int) point.getX(), (int) point.getY(), !red));
-               
+                sw.addPoint(new ch.kbw.Model.Point(x,y, red));
+
                 //bluePoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                sw.buildSquare(!red);
+                if(sw.buildSquare(red)){
+                    msg("Blue");
+                }
                 //algorithm(blue); 
                 red = true;
             }
-
+            
         }
+    }
+    
+    public void msg(String color){
+        Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Win!");
+            alert.setHeaderText("Congratulation " + color);
+            alert.setContentText("YOU WIN!");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
     }
 
     @FXML

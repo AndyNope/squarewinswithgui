@@ -65,7 +65,7 @@ public class SquareWins {
         }
     }
 
-    public void buildSquare(boolean blue) {
+    public boolean buildSquare(boolean blue) {
         ArrayList<Vector> vectors;
         if (blue) {
             vectors = vectorsOfPlayerBlue;
@@ -109,7 +109,8 @@ public class SquareWins {
                                 System.out.println("");
                                 System.out.println("");
                                 System.out.println("");
-                                System.exit(0);
+                                //System.exit(0);
+                                return true;
                             }
                         } else {
                             if (expectedDiagonalPointExists(getPointOfPlayerRed(), cornerPoint)) {
@@ -118,7 +119,8 @@ public class SquareWins {
                                 System.out.println("");
                                 System.out.println("");
                                 System.out.println("");
-                                System.exit(0);
+                                //System.exit(0);
+                                return true;
                             }
                         }
 
@@ -126,6 +128,7 @@ public class SquareWins {
                 }
             }
         }
+        return false;
     }
 
     //Addition of the 2 Vectors
@@ -504,7 +507,6 @@ public class SquareWins {
 
     //clear the Arraylist of the Vectors
     public void updateVectors() {
-        Point temp = null;
         vectorsOfPlayerBlue.clear();
         for (int i = 0; i < pointOfPlayerBlue.size(); i++) {
             for (int j = 1; j < pointOfPlayerBlue.size(); j++) {
@@ -515,6 +517,7 @@ public class SquareWins {
                 }
             }
         }
+        
         vectorsOfPlayerRed.clear();
         for (int i = 0; i < pointOfPlayerRed.size(); i++) {
             for (int j = 1; j < pointOfPlayerRed.size(); j++) {
