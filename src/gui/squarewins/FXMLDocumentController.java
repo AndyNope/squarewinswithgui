@@ -32,7 +32,7 @@ public class FXMLDocumentController implements Initializable {
     private Point point, nextPoint;
     private SquareWins sw = new SquareWins();
     // private char playersTurn = 'r';//r=red b= blue in this case red starts
-    private boolean color = true; //true=red | false=blue
+    private boolean red = true; //true=red | false=blue
     private RadioButton[] allPoints;
 
     private ArrayList<Line> lines = new ArrayList<Line>();
@@ -143,26 +143,28 @@ public class FXMLDocumentController implements Initializable {
             selectedPoints.add(point);
             System.out.println("Koordinate: " + point.getX() + "|" + point.getY());
 
-            if (color) {
+            if (red) {
                 source.setStyle("-fx-mark-color: red;");
                 System.out.println("red");
-                sw.addPoint(new ch.kbw.Model.Point((int) point.getX(), (int) point.getY(), false));
-                color = false;
-                redPoints.add(point);
+                sw.addPoint(new ch.kbw.Model.Point((int) point.getX(), (int) point.getY(), red));
+                
+                //redPoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                sw.buildSquare(!color);
+                sw.buildSquare(red);
                 //algorithm(red);
+                red = false;
             } else {
                 source.setStyle("-fx-mark-color: blue;");
                 System.out.println("blue");
-                sw.addPoint(new ch.kbw.Model.Point((int) point.getX(), (int) point.getY(), true));
-                color = true;
-                bluePoints.add(point);
+                sw.addPoint(new ch.kbw.Model.Point((int) point.getX(), (int) point.getY(), !red));
+               
+                //bluePoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                sw.buildSquare(color);
-                //algorithm(blue);
+                sw.buildSquare(!red);
+                //algorithm(blue); 
+                red = true;
             }
 
         }

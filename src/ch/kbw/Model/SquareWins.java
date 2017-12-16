@@ -65,9 +65,9 @@ public class SquareWins {
         }
     }
 
-    public void buildSquare(boolean color) {
+    public void buildSquare(boolean blue) {
         ArrayList<Vector> vectors;
-        if (color) {
+        if (blue) {
             vectors = vectorsOfPlayerBlue;
         } else {
             vectors = vectorsOfPlayerRed;
@@ -94,7 +94,7 @@ public class SquareWins {
                             System.out.println(cornerPoint.getX() + "/" + cornerPoint.getY());
                         }
                         //Set the quare vectors
-                        setSquareVectors(vectors.get(i), vectors.get(j), commonPoint);
+                        //setSquareVectors(vectors.get(i), vectors.get(j), commonPoint);
 
                         //sort the Arrays
 //                        if (color) {
@@ -102,10 +102,10 @@ public class SquareWins {
 //                        } else {
 //                            setVectorsOfPlayerRed(convertArray(vectors));
 //                        }
-                        if (color) {
+                        if (blue) {
                             if (expectedDiagonalPointExists(getPointOfPlayerBlue(), cornerPoint)) {
                                 System.out.println("");
-                                System.out.println("Win!");
+                                System.out.println("Blue Win!");
                                 System.out.println("");
                                 System.out.println("");
                                 System.out.println("");
@@ -114,7 +114,7 @@ public class SquareWins {
                         } else {
                             if (expectedDiagonalPointExists(getPointOfPlayerRed(), cornerPoint)) {
                                 System.out.println("");
-                                System.out.println("Win!");
+                                System.out.println("Red Win!");
                                 System.out.println("");
                                 System.out.println("");
                                 System.out.println("");
@@ -491,13 +491,27 @@ public class SquareWins {
         }
     }
 
+    //belongs to UpdateVectors, for checking, if a COnnection already exists
+    public boolean checkUpdateVectorNotALRExists(Point a, Point b, ArrayList<Vector> vectors) {
+            for (Vector v : vectors) {
+                if ((checkIfPointsAreEquals(a, v.getPointA()) && checkIfPointsAreEquals(b, v.getPointB())) || (checkIfPointsAreEquals(a, v.getPointB()) && checkIfPointsAreEquals(b, v.getPointA()))) {
+                    return false;
+                }
+            }
+        
+        return true;
+    }
+
+    //clear the Arraylist of the Vectors
     public void updateVectors() {
         Point temp = null;
         vectorsOfPlayerBlue.clear();
         for (int i = 0; i < pointOfPlayerBlue.size(); i++) {
             for (int j = 1; j < pointOfPlayerBlue.size(); j++) {
                 if (i != j) {
-                    vectorsOfPlayerBlue.add(new Vector(pointOfPlayerBlue.get(i), pointOfPlayerBlue.get(j)));
+                    if (checkUpdateVectorNotALRExists(pointOfPlayerBlue.get(i), pointOfPlayerBlue.get(j), vectorsOfPlayerBlue)) {
+                        vectorsOfPlayerBlue.add(new Vector(pointOfPlayerBlue.get(i), pointOfPlayerBlue.get(j)));
+                    }
                 }
             }
         }
@@ -505,7 +519,9 @@ public class SquareWins {
         for (int i = 0; i < pointOfPlayerRed.size(); i++) {
             for (int j = 1; j < pointOfPlayerRed.size(); j++) {
                 if (i != j) {
-                    vectorsOfPlayerRed.add(new Vector(pointOfPlayerRed.get(i), pointOfPlayerRed.get(j)));
+                    if (checkUpdateVectorNotALRExists(pointOfPlayerRed.get(i), pointOfPlayerRed.get(j), vectorsOfPlayerRed)) {
+                        vectorsOfPlayerRed.add(new Vector(pointOfPlayerRed.get(i), pointOfPlayerRed.get(j)));
+                    }
                 }
             }
         }
