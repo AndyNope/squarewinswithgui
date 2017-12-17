@@ -157,7 +157,8 @@ public class FXMLDocumentController implements Initializable {
                 sw.updateVectors();
                 if(sw.checkwin().equals("blue")){
                     //drawLine();
-                    msg("BLUE");
+                    msg("BLUE", "RED");
+                    resetGame();
                 }
                 //algorithm(red);
                 blue = false;
@@ -171,7 +172,8 @@ public class FXMLDocumentController implements Initializable {
                 sw.updateVectors();
                 if(sw.checkwin().equals("red")){
                     //drawLine();
-                    msg("RED");
+                    msg("RED", "BLUE");
+                    resetGame();
                 }
                 //algorithm(blue); 
                 blue = true;
@@ -180,11 +182,19 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
-    public void msg(String color){
+    public void resetGame(){
+        for(RadioButton rb : allPoints){
+            rb.setDisable(false);
+            rb.setSelected(false);
+        }
+        sw.reset();
+    }
+    
+    public void msg(String color, String color2){
         Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Win!");
             alert.setHeaderText("Congratulation " + color);
-            alert.setContentText("YOU WIN!");
+            alert.setContentText("YOU WIN! " + color2 + ", now it's your turn!");
             alert.showAndWait().ifPresent(rs -> {
                 if (rs == ButtonType.OK) {
                     System.out.println("Pressed OK.");
@@ -207,9 +217,6 @@ public class FXMLDocumentController implements Initializable {
             lines.add(new Line(sw.getDrawPoints()[1].getX() + 9, sw.getDrawPoints()[1].getY() + 9, sw.getDrawPoints()[2].getX() + 9, sw.getDrawPoints()[2].getY() + 9));
             lines.add(new Line(sw.getDrawPoints()[2].getX() + 9, sw.getDrawPoints()[2].getY() + 9, sw.getDrawPoints()[3].getX() + 9, sw.getDrawPoints()[3].getY() + 9));
             lines.add(new Line(sw.getDrawPoints()[3].getX() + 9, sw.getDrawPoints()[3].getY() + 9, sw.getDrawPoints()[0].getX() + 9, sw.getDrawPoints()[0].getY() + 9));
-            System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
-
-        selectedPoints.clear();
         addLineToGridPane();
     }
 
