@@ -37,12 +37,10 @@ public class SquareWins {
     private double aLength;
     //length of the second vector
     private double bLength;
-    //expected vectors to finish a square
-    private Vector squareVectorA, squareVectorB;
+    
 
     public SquareWins() {
-        squareVectorA = null;
-        squareVectorB = null;
+
     }
 
     //implementation for adding a vector of a field
@@ -222,20 +220,7 @@ public class SquareWins {
         }
     }
 
-    //set the 2 vectors new to calculate the expected vectors later
-    public void setSquareVectors(Vector v1, Vector v2, Point commonPoint) {
 
-        if (commonPoint.equals(v1.getPointA())) {
-            this.squareVectorA = new Vector(commonPoint, v1.getPointA());
-        } else {
-            this.squareVectorA = new Vector(commonPoint, v1.getPointB());
-        }
-        if (!commonPoint.equals(v2.getPointA())) {
-            this.squareVectorB = new Vector(commonPoint, v2.getPointA());
-        } else {
-            this.squareVectorB = new Vector(commonPoint, v2.getPointB());
-        }
-    }
 
     //It checks the calculated expected vector if they exist,when yes then win!!!
     public boolean expectedVectorExists(ArrayList<Vector> vectors, Point diagonalPoint) {
@@ -489,13 +474,6 @@ public class SquareWins {
         return vectorsOfPlayerRed;
     }
 
-    public Vector getSquareVectorA() {
-        return squareVectorA;
-    }
-
-    public Vector getSquareVectorB() {
-        return squareVectorB;
-    }
 
     public void setVectorsOfPlayerBlue(ArrayList<Vector> vectorsOfPlayerBlue) {
         this.vectorsOfPlayerBlue = vectorsOfPlayerBlue;
@@ -589,5 +567,26 @@ public class SquareWins {
             return "red";
         }
         return "default";
+    }
+    public void reset(){
+    //player true is player 1 and false is player 2
+    player = true;
+
+    //set points
+    commonPoint = null;
+    //ArrayList of the setted vectors
+    vectorsOfPlayerBlue.clear();
+    vectorsOfPlayerRed.clear();
+
+    //---this is the 5*5 field---//
+    //Array / coordination of the Points
+    pointOfPlayerBlue.clear();
+    pointOfPlayerRed.clear();
+
+    //length of the first vector
+    aLength = RESVECT;
+    //length of the second vector
+    bLength = RESVECT;
+    
     }
 }
