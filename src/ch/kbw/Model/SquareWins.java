@@ -71,9 +71,9 @@ public class SquareWins {
 
     public String buildSquare(boolean blue) {
         try {
-            Thread.sleep(1);
+            Thread.sleep((long) 0.1);
         } catch (InterruptedException ex) {
-            System.err.println("Oupps");
+            Logger.getLogger(SquareWins.class.getName()).log(Level.SEVERE, null, ex);
         }
         ArrayList<Vector> vectors;
         if (blue) {
@@ -96,8 +96,10 @@ public class SquareWins {
 
                         //setCommonPoint
                         setCommonPoint(vectors.get(i), vectors.get(j));
+                        System.err.println(getXandY(commonPoint));
 
                         Point cornerPoint = getCornerpoint(getCommonPoint(), vectors.get(i), vectors.get(j));
+                        System.err.println(getXandY(cornerPoint));
                         if (cornerPoint != null) {
                             System.out.println("Diagonal-Coordination");
                             System.out.println(cornerPoint.getX() + "/" + cornerPoint.getY());
@@ -110,7 +112,12 @@ public class SquareWins {
 //                            setVectorsOfPlayerBlue(convertArray(vectors));
 //                        } else {
 //                            setVectorsOfPlayerRed(convertArray(vectors));
-//                        }
+//                        
+                        try {
+                            Thread.sleep((long) 0.1);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(SquareWins.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         if (blue) {
                             if (expectedDiagonalPointExists(getPointOfPlayerBlue(), cornerPoint)) {
                                 System.out.println("");
@@ -124,10 +131,14 @@ public class SquareWins {
                                 setDrawPoints(getNotCommenPoint(vectors.get(i), getCommonPoint()), 2);
                                 setDrawPoints(getNotCommenPoint(vectors.get(j), getCommonPoint()), 3);
                                 //System.exit(0);
+                                System.err.println("Cornerpoint: " + getXandY(cornerPoint));
+
+                                System.err.println(getTextPointXAndY(vectors.get(i).getPointA(), vectors.get(i).getPointB()));
+                                System.err.println(getTextPointXAndY(vectors.get(j).getPointA(), vectors.get(j).getPointB()));
                                 return "blue";
                             }
-                        } 
-                        if(!blue){
+                        }
+                        if (!blue) {
                             if (expectedDiagonalPointExists(getPointOfPlayerRed(), cornerPoint)) {
                                 System.out.println("");
                                 System.out.println("Red Win!");
@@ -151,6 +162,10 @@ public class SquareWins {
         return "default";
     }
 
+    public String getXandY(Point point) {
+        return point.getX() + "/" + point.getY();
+    }
+
     public Point getNotCommenPoint(Vector vec, Point commonPoint) {
         if (checkIfPointsAreEquals(commonPoint, vec.getPointA())) {
             return vec.getPointB();
@@ -169,31 +184,22 @@ public class SquareWins {
 
     //Addition of the 2 Vectors
     private Point getCornerpoint(Point common, Vector vA, Vector vB) {
-        Point point = null;
+        Point point = null, pA, pB;;
         //Lenght of vectors
         int xLenght = 0, yLenght = 0;
-
-        //if Point A of Vec A is equal with common point
         if (checkIfPointsAreEquals(vA.getPointA(), common)) {
-            //Use Point B of vector A
-            if (checkIfPointsAreEquals(vB.getPointA(), common)) {
-                xLenght = vB.getPointB().getX() - common.getX();
-                yLenght = vB.getPointB().getY() - common.getY();
-            } else {
-                xLenght = vB.getPointA().getX() - common.getX();
-                yLenght = vB.getPointA().getY() - common.getY();
-            }
-            point = new Point(vA.getPointB().getX() + xLenght, vA.getPointB().getY() + yLenght);
+            pA = vA.getPointB();
         } else {
-            if (checkIfPointsAreEquals(vA.getPointA(), common)) {
-                xLenght = vA.getPointB().getX() - common.getX();
-                yLenght = vA.getPointB().getY() - common.getY();
-            } else {
-                xLenght = vA.getPointA().getX() - common.getX();
-                yLenght = vA.getPointA().getY() - common.getY();
-            }
-            point = new Point(vB.getPointA().getX() + xLenght, vB.getPointA().getY() + yLenght);
+            pA = vA.getPointA();
         }
+        if (checkIfPointsAreEquals(vB.getPointA(), common)) {
+            pB = vB.getPointB();
+        } else {
+            pB = vB.getPointA();
+        }
+        xLenght = pB.getX() - common.getX();
+        yLenght = pB.getY() - common.getY();
+        point = new Point(pA.getX() + xLenght, pA.getY() + yLenght);
         return point;
     }
 
@@ -450,6 +456,11 @@ public class SquareWins {
         System.out.println("A: " + x.getX() + "/" + x.getY() + " B: " + y.getX() + "/" + y.getY());
     }
 
+    public String getTextPointXAndY(Point x, Point y) {
+        String text = "A: " + x.getX() + "/" + x.getY() + " B: " + y.getX() + "/" + y.getY();
+        return text;
+    }
+
     public ArrayList<Vector> getVectors() {
         return vectorsOfPlayerBlue;
     }
@@ -579,5 +590,4 @@ public class SquareWins {
         }
         return "default";
     }
-
 }
