@@ -35,7 +35,7 @@ public class FXMLDocumentController implements Initializable {
     private Point point, nextPoint;
     private SquareWins sw = new SquareWins();
     // private char playersTurn = 'r';//r=red b= blue in this case red starts
-    private boolean red = true; //true=red | false=blue
+    private boolean blue = true; //true=blue | false=red
     private RadioButton[] allPoints;
 
     private ArrayList<Line> lines = new ArrayList<Line>();
@@ -143,36 +143,38 @@ public class FXMLDocumentController implements Initializable {
         point = (Point) source.getUserData();
 
         if (source.isSelected()) {
-            selectedPoints.add(point);
+            //selectedPoints.add(point);
             int x=(int) ((point.getX()-86)/20),y = (int) ((point.getY()-87)/20);
             System.out.println("Koordinate: " + x + "|" + y);
             
-            if (red) {
-                source.setStyle("-fx-mark-color: red;");
-                System.out.println("red");
-                sw.addPoint(new ch.kbw.Model.Point(x, y, !red));
+            if (blue) {
+                source.setStyle("-fx-mark-color: blue;");
+                System.out.println("blue");
+                sw.addPoint(new ch.kbw.Model.Point(x, y, blue));
 
                 //redPoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                if(sw.buildSquare(!red)){
-                    msg("RED");
+                if(sw.buildSquare(blue).equals("blue")){
+                    //drawLine();
+                    msg("BLUE");
                 }
                 //algorithm(red);
-                red = false;
+                blue = false;
             } else {
-                source.setStyle("-fx-mark-color: blue;");
-                System.out.println("blue");
-                sw.addPoint(new ch.kbw.Model.Point(x,y, red));
+                source.setStyle("-fx-mark-color: red;");
+                System.out.println("red");
+                sw.addPoint(new ch.kbw.Model.Point(x,y, !blue));
 
                 //bluePoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                if(sw.buildSquare(red)){
-                    msg("Blue");
+                if(sw.buildSquare(!blue).equals("red")){
+                    //drawLine();
+                    msg("RED");
                 }
                 //algorithm(blue); 
-                red = true;
+                blue = true;
             }
             
         }
@@ -197,6 +199,16 @@ public class FXMLDocumentController implements Initializable {
             lines.add(new Line(point.getX() + 9, point.getY() + 9, nextPoint.getX() + 9, nextPoint.getY() + 9));
             System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
         }
+        selectedPoints.clear();
+        addLineToGridPane();
+    }
+    private void drawLine(){
+            lines.add(new Line(sw.getDrawPoints()[0].getX() + 9, sw.getDrawPoints()[0].getY() + 9, sw.getDrawPoints()[1].getX() + 9, sw.getDrawPoints()[1].getY() + 9));
+            lines.add(new Line(sw.getDrawPoints()[1].getX() + 9, sw.getDrawPoints()[1].getY() + 9, sw.getDrawPoints()[2].getX() + 9, sw.getDrawPoints()[2].getY() + 9));
+            lines.add(new Line(sw.getDrawPoints()[2].getX() + 9, sw.getDrawPoints()[2].getY() + 9, sw.getDrawPoints()[3].getX() + 9, sw.getDrawPoints()[3].getY() + 9));
+            lines.add(new Line(sw.getDrawPoints()[3].getX() + 9, sw.getDrawPoints()[3].getY() + 9, sw.getDrawPoints()[0].getX() + 9, sw.getDrawPoints()[0].getY() + 9));
+            System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
+
         selectedPoints.clear();
         addLineToGridPane();
     }

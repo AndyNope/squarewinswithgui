@@ -29,6 +29,8 @@ public class SquareWins {
     private ArrayList<Point> pointOfPlayerBlue = new ArrayList<>();
     private ArrayList<Point> pointOfPlayerRed = new ArrayList<>();
 
+    private Point[] drawPoints = new Point[4];
+
     //length of the first vector
     private double aLength;
     //length of the second vector
@@ -65,7 +67,7 @@ public class SquareWins {
         }
     }
 
-    public boolean buildSquare(boolean blue) {
+    public String buildSquare(boolean blue) {
         ArrayList<Vector> vectors;
         if (blue) {
             vectors = vectorsOfPlayerBlue;
@@ -86,9 +88,9 @@ public class SquareWins {
                         printOutPointXAndY(vectors.get(j).getPointA(), vectors.get(j).getPointB());
 
                         //setCommonPoint
-                        this.commonPoint = setCommonPoint(vectors.get(i), vectors.get(j));
+                        setCommonPoint(vectors.get(i), vectors.get(j));
 
-                        Point cornerPoint = getCornerpoint(commonPoint, vectors.get(i), vectors.get(j));
+                        Point cornerPoint = getCornerpoint(getCommonPoint(), vectors.get(i), vectors.get(j));
                         if (cornerPoint != null) {
                             System.out.println("Diagonal-Coordination");
                             System.out.println(cornerPoint.getX() + "/" + cornerPoint.getY());
@@ -109,8 +111,13 @@ public class SquareWins {
                                 System.out.println("");
                                 System.out.println("");
                                 System.out.println("");
+                                //Set the Points to draw
+                                setDrawPoints(cornerPoint, 0);
+                                setDrawPoints(getCommonPoint(), 1);
+                                setDrawPoints(getNotCommenPoint(vectors.get(i), getCommonPoint()), 2);
+                                setDrawPoints(getNotCommenPoint(vectors.get(j), getCommonPoint()), 3);
                                 //System.exit(0);
-                                return true;
+                                return "blue";
                             }
                         } else {
                             if (expectedDiagonalPointExists(getPointOfPlayerRed(), cornerPoint)) {
@@ -119,8 +126,13 @@ public class SquareWins {
                                 System.out.println("");
                                 System.out.println("");
                                 System.out.println("");
+                                //Set the Points to draw
+                                setDrawPoints(cornerPoint, 0);
+                                setDrawPoints(getCommonPoint(), 1);
+                                setDrawPoints(getNotCommenPoint(vectors.get(i), getCommonPoint()), 2);
+                                setDrawPoints(getNotCommenPoint(vectors.get(j), getCommonPoint()), 3);
                                 //System.exit(0);
-                                return true;
+                                return "red";
                             }
                         }
 
@@ -128,7 +140,23 @@ public class SquareWins {
                 }
             }
         }
-        return false;
+        return "default";
+    }
+
+    public Point getNotCommenPoint(Vector vec, Point commonPoint) {
+        if (checkIfPointsAreEquals(commonPoint, vec.getPointA())) {
+            return vec.getPointB();
+        } else {
+            return vec.getPointA();
+        }
+    }
+
+    public Point[] getDrawPoints() {
+        return drawPoints;
+    }
+
+    public void setDrawPoints(Point drawPoints, int array) {
+        this.drawPoints[array] = drawPoints;
     }
 
     //Addition of the 2 Vectors
@@ -162,7 +190,7 @@ public class SquareWins {
     }
 
     //It's going to compare the points of the quarevectors and set the common vector
-    public Point setCommonPoint(Vector v1, Vector v2) {
+    public void setCommonPoint(Vector v1, Vector v2) {
         Point[] points = new Point[4];
         points[0] = v1.getPointA();
         points[1] = v1.getPointB();
@@ -173,13 +201,11 @@ public class SquareWins {
                 if (a != b) {
                     if (checkIfPointsAreEquals(points[a], points[b])) {
                         System.out.println("(common Hinzugefügt " + points[b].getX() + "/" + points[b].getY() + ")");
-                        return points[b];
+                        this.commonPoint = points[b];
                     }
                 }
             }
         }
-        return null;
-
     }
 
     //set the 2 vectors new to calculate the expected vectors later
@@ -496,12 +522,12 @@ public class SquareWins {
 
     //belongs to UpdateVectors, for checking, if a COnnection already exists
     public boolean checkUpdateVectorNotALRExists(Point a, Point b, ArrayList<Vector> vectors) {
-            for (Vector v : vectors) {
-                if ((checkIfPointsAreEquals(a, v.getPointA()) && checkIfPointsAreEquals(b, v.getPointB())) || (checkIfPointsAreEquals(a, v.getPointB()) && checkIfPointsAreEquals(b, v.getPointA()))) {
-                    return false;
-                }
+        for (Vector v : vectors) {
+            if ((checkIfPointsAreEquals(a, v.getPointA()) && checkIfPointsAreEquals(b, v.getPointB())) || (checkIfPointsAreEquals(a, v.getPointB()) && checkIfPointsAreEquals(b, v.getPointA()))) {
+                return false;
             }
-        
+        }
+
         return true;
     }
 
@@ -517,7 +543,7 @@ public class SquareWins {
                 }
             }
         }
-        
+
         vectorsOfPlayerRed.clear();
         for (int i = 0; i < pointOfPlayerRed.size(); i++) {
             for (int j = 1; j < pointOfPlayerRed.size(); j++) {
