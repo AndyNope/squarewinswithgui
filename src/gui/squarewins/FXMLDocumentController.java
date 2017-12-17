@@ -29,12 +29,11 @@ import javafx.scene.shape.Line;
  */
 public class FXMLDocumentController implements Initializable {
 
-    private ArrayList<Point> selectedPoints = new ArrayList<>();
     private ArrayList<Point> bluePoints = new ArrayList<>();
     private ArrayList<Point> redPoints = new ArrayList<>();
     private Point point, nextPoint;
     private SquareWins sw = new SquareWins();
-    // private char playersTurn = 'r';//r=red b= blue in this case red starts
+   
     private boolean blue = true; //true=blue | false=red
     private RadioButton[] allPoints;
 
@@ -138,25 +137,25 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void pointSelectionAction(ActionEvent event) {
+    private void pointSelectionAction(ActionEvent event) throws InterruptedException {
         RadioButton source = (RadioButton) event.getSource();
         point = (Point) source.getUserData();
 
         if (source.isSelected()) {
-            //selectedPoints.add(point);
-            int x=(int) ((point.getX()-86)/20),y = (int) ((point.getY()-87)/20);
+
+            int x = (int) ((point.getX() - 86) / 20), y = (int) ((point.getY() - 87) / 20);
             System.out.println("Koordinate: " + x + "|" + y);
-            
+
             if (blue) {
                 source.setStyle("-fx-mark-color: blue;");
                 System.out.println("blue");
                 sw.addPoint(new ch.kbw.Model.Point(x, y, true));
 
-                //redPoints.add(point);
+                bluePoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                if(sw.checkwin().equals("blue")){
-                    //drawLine();
+                if (sw.checkwin().equals("blue")) {
+                    drawLine();
                     msg("BLUE", "RED");
                     resetGame();
                 }
@@ -165,58 +164,85 @@ public class FXMLDocumentController implements Initializable {
             } else {
                 source.setStyle("-fx-mark-color: red;");
                 System.out.println("red");
-                sw.addPoint(new ch.kbw.Model.Point(x,y, false));
+                sw.addPoint(new ch.kbw.Model.Point(x, y, false));
 
-                //bluePoints.add(point);
+                redPoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                if(sw.checkwin().equals("red")){
-                    //drawLine();
+                if (sw.checkwin().equals("red")) {
+                    drawLine();
                     msg("RED", "BLUE");
                     resetGame();
                 }
                 //algorithm(blue); 
                 blue = true;
             }
-            
+
         }
     }
-    
-    public void resetGame(){
-        for(RadioButton rb : allPoints){
+    //maybe place method into go() method --> rename go() to restart()
+    public void resetGame() {
+        for (RadioButton rb : allPoints) {
             rb.setDisable(false);
             rb.setSelected(false);
         }
         sw.reset();
     }
-    
-    public void msg(String color, String color2){
+
+    public void msg(String color, String color2) throws InterruptedException {
+
         Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Win!");
-            alert.setHeaderText("Congratulation: " + "YOU WIN! " + color);
-            alert.setContentText(color2 + ", now it's your turn!");
-            alert.showAndWait().ifPresent(rs -> {
-                if (rs == ButtonType.OK) {
-                    System.out.println("Pressed OK.");
-                }
-            });
+        alert.setTitle("Win!");
+        alert.setHeaderText("Congratulation: " + "YOU WIN! " + color);
+        alert.setContentText(color2 + ", now it's your turn! The field is being deleted.");
+
+        alert.showAndWait().ifPresent(rs -> {
+            if (rs == ButtonType.OK) {
+                System.out.println("Pressed OK.");
+            }
+        });
+        Thread.sleep(800);
     }
 
     @FXML
     private void go(ActionEvent event) {
-        for (int i = 0; i < selectedPoints.size() - 1; i++) {
-            nextPoint = selectedPoints.get(i);
-            lines.add(new Line(point.getX() + 9, point.getY() + 9, nextPoint.getX() + 9, nextPoint.getY() + 9));
-            System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
-        }
-        selectedPoints.clear();
-        addLineToGridPane();
+
     }
-    private void drawLine(){
-            lines.add(new Line(sw.getDrawPoints()[0].getX() + 9, sw.getDrawPoints()[0].getY() + 9, sw.getDrawPoints()[1].getX() + 9, sw.getDrawPoints()[1].getY() + 9));
-            lines.add(new Line(sw.getDrawPoints()[1].getX() + 9, sw.getDrawPoints()[1].getY() + 9, sw.getDrawPoints()[2].getX() + 9, sw.getDrawPoints()[2].getY() + 9));
-            lines.add(new Line(sw.getDrawPoints()[2].getX() + 9, sw.getDrawPoints()[2].getY() + 9, sw.getDrawPoints()[3].getX() + 9, sw.getDrawPoints()[3].getY() + 9));
-            lines.add(new Line(sw.getDrawPoints()[3].getX() + 9, sw.getDrawPoints()[3].getY() + 9, sw.getDrawPoints()[0].getX() + 9, sw.getDrawPoints()[0].getY() + 9));
+
+    private void drawLine() throws InterruptedException {
+        //Andys Funktion auskommentiert
+        /*lines.add(new Line(sw.getDrawPoints()[0].getX() + 9, sw.getDrawPoints()[0].getY() + 9, sw.getDrawPoints()[1].getX() + 9, sw.getDrawPoints()[1].getY() + 9));
+        lines.add(new Line(sw.getDrawPoints()[1].getX() + 9, sw.getDrawPoints()[1].getY() + 9, sw.getDrawPoints()[2].getX() + 9, sw.getDrawPoints()[2].getY() + 9));
+        lines.add(new Line(sw.getDrawPoints()[2].getX() + 9, sw.getDrawPoints()[2].getY() + 9, sw.getDrawPoints()[3].getX() + 9, sw.getDrawPoints()[3].getY() + 9));
+        lines.add(new Line(sw.getDrawPoints()[3].getX() + 9, sw.getDrawPoints()[3].getY() + 9, sw.getDrawPoints()[0].getX() + 9, sw.getDrawPoints()[0].getY() + 9));
+        //System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
+
+        selectedPoints.clear();
+        addLineToGridPane();*/
+        if (sw.checkwin().equals("blue")) {
+            for (int i = 0; i < bluePoints.size(); i++) {
+                point = bluePoints.get(i);
+                if (i != bluePoints.size() - 1) {
+                    nextPoint = bluePoints.get(i + 1);
+                } else {
+                    nextPoint = bluePoints.get(0);
+                }
+                lines.add(new Line(point.getX() + 9, point.getY() + 9, nextPoint.getX() + 9, nextPoint.getY() + 9));
+                System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
+            }
+        } else {
+            for (int i = 0; i < redPoints.size(); i++) {
+                point = redPoints.get(i);
+                if (i != redPoints.size() - 1) {
+                    nextPoint = redPoints.get(i + 1);
+                } else {
+                    nextPoint = redPoints.get(0);
+                }
+                lines.add(new Line(point.getX() + 9, point.getY() + 9, nextPoint.getX() + 9, nextPoint.getY() + 9));
+                System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
+            }
+        }
+
         addLineToGridPane();
     }
 

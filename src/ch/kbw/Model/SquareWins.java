@@ -5,9 +5,11 @@
  */
 package ch.kbw.Model;
 
+import gui.squarewins.Main;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.Node;
 
 /**
  *
@@ -37,7 +39,6 @@ public class SquareWins {
     private double aLength;
     //length of the second vector
     private double bLength;
-    
 
     public SquareWins() {
 
@@ -219,8 +220,6 @@ public class SquareWins {
             }
         }
     }
-
-
 
     //It checks the calculated expected vector if they exist,when yes then win!!!
     public boolean expectedVectorExists(ArrayList<Vector> vectors, Point diagonalPoint) {
@@ -474,7 +473,6 @@ public class SquareWins {
         return vectorsOfPlayerRed;
     }
 
-
     public void setVectorsOfPlayerBlue(ArrayList<Vector> vectorsOfPlayerBlue) {
         this.vectorsOfPlayerBlue = vectorsOfPlayerBlue;
     }
@@ -568,25 +566,36 @@ public class SquareWins {
         }
         return "default";
     }
-    public void reset(){
-    //player true is player 1 and false is player 2
-    player = true;
 
-    //set points
-    commonPoint = null;
-    //ArrayList of the setted vectors
-    vectorsOfPlayerBlue.clear();
-    vectorsOfPlayerRed.clear();
+    public void reset() {
+        //player true is player 1 and false is player 2
+        player = true;
 
-    //---this is the 5*5 field---//
-    //Array / coordination of the Points
-    pointOfPlayerBlue.clear();
-    pointOfPlayerRed.clear();
+        //set points
+        commonPoint = null;
+        //ArrayList of the setted vectors
+        vectorsOfPlayerBlue.clear();
+        vectorsOfPlayerRed.clear();
 
-    //length of the first vector
-    aLength = RESVECT;
-    //length of the second vector
-    bLength = RESVECT;
-    
+        //---this is the 5*5 field---//
+        //Array / coordination of the Points
+        pointOfPlayerBlue.clear();
+        pointOfPlayerRed.clear();
+
+        //length of the first vector
+        aLength = RESVECT;
+        //length of the second vector
+        bLength = RESVECT;
+        
+        //delete all lines from anchorpane
+        ArrayList<Node> deleteList = new ArrayList<>();
+        for(Node c : Main.root.getChildren()){
+            if(c.getTypeSelector().equals("Line")){
+                deleteList.add(c);
+            }
+        }
+        Main.root.getChildren().removeAll(deleteList);
+        
+
     }
 }
