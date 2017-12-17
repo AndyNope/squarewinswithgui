@@ -150,12 +150,12 @@ public class FXMLDocumentController implements Initializable {
             if (blue) {
                 source.setStyle("-fx-mark-color: blue;");
                 System.out.println("blue");
-                sw.addPoint(new ch.kbw.Model.Point(x, y, blue));
+                sw.addPoint(new ch.kbw.Model.Point(x, y, true));
 
                 //redPoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                if(sw.buildSquare(blue).equals("blue")){
+                if(sw.buildSquare(true).equals("blue")){
                     //drawLine();
                     msg("BLUE");
                 }
@@ -164,12 +164,12 @@ public class FXMLDocumentController implements Initializable {
             } else {
                 source.setStyle("-fx-mark-color: red;");
                 System.out.println("red");
-                sw.addPoint(new ch.kbw.Model.Point(x,y, !blue));
+                sw.addPoint(new ch.kbw.Model.Point(x,y, false));
 
                 //bluePoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                if(sw.buildSquare(!blue).equals("red")){
+                if(sw.buildSquare(false).equals("red")){
                     //drawLine();
                     msg("RED");
                 }
