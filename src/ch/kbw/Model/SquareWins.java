@@ -511,10 +511,14 @@ public class SquareWins {
     }
 
     public void addPoint(Point point) {
-        if (pointNotalreadyExists(pointOfPlayerBlue, point) && pointNotalreadyExists(pointOfPlayerRed, point)) {
-            if (point.getColor()) {
+
+        if (point.getColor() == true) {
+            if (pointNotalreadyExists(pointOfPlayerBlue, point)) {
                 pointOfPlayerBlue.add(point);
-            } else {
+            }
+        }
+        if (pointNotalreadyExists(pointOfPlayerRed, point)) {
+            if (point.getColor() == false) {
                 pointOfPlayerRed.add(point);
             }
         }
@@ -555,4 +559,15 @@ public class SquareWins {
             }
         }
     }
+
+    public String checkwin() {
+        updateVectors();
+        if (buildSquare(true).equals("blue")) {
+            return "blue";
+        } else if (buildSquare(false).equals("red")) {
+            return "red";
+        }
+        return "default";
+    }
+
 }

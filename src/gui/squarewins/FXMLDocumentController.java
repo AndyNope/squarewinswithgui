@@ -155,7 +155,7 @@ public class FXMLDocumentController implements Initializable {
                 //redPoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                if(sw.buildSquare(true).equals("blue")){
+                if(sw.checkwin().equals("blue")){
                     //drawLine();
                     msg("BLUE");
                 }
@@ -169,7 +169,7 @@ public class FXMLDocumentController implements Initializable {
                 //bluePoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
-                if(sw.buildSquare(false).equals("red")){
+                if(sw.checkwin().equals("red")){
                     //drawLine();
                     msg("RED");
                 }
