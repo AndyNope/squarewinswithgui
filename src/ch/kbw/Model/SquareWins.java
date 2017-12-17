@@ -6,6 +6,8 @@
 package ch.kbw.Model;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -68,6 +70,11 @@ public class SquareWins {
     }
 
     public String buildSquare(boolean blue) {
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException ex) {
+            System.err.println("Oupps");
+        }
         ArrayList<Vector> vectors;
         if (blue) {
             vectors = vectorsOfPlayerBlue;
@@ -119,7 +126,8 @@ public class SquareWins {
                                 //System.exit(0);
                                 return "blue";
                             }
-                        } else {
+                        } 
+                        if(!blue){
                             if (expectedDiagonalPointExists(getPointOfPlayerRed(), cornerPoint)) {
                                 System.out.println("");
                                 System.out.println("Red Win!");
@@ -335,6 +343,7 @@ public class SquareWins {
 
             System.out.println("Vektor " + count + ": " + (v.getxVec() < 0 ? "(" + v.getxVec() + ")" : v.getxVec()) + " | " + v.getyVec());
             printOutPointXAndY(v.getPointA(), v.getPointB());
+            System.out.println(v.getPointA().getColor() + " " + v.getPointB().getColor());
             count++;
         }
     }
@@ -564,7 +573,8 @@ public class SquareWins {
         updateVectors();
         if (buildSquare(true).equals("blue")) {
             return "blue";
-        } else if (buildSquare(false).equals("red")) {
+        }
+        if (buildSquare(false).equals("red")) {
             return "red";
         }
         return "default";
