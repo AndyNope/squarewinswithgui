@@ -193,8 +193,8 @@ public class FXMLDocumentController implements Initializable {
     public void msg(String color, String color2){
         Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Win!");
-            alert.setHeaderText("Congratulation " + color);
-            alert.setContentText("YOU WIN! " + color2 + ", now it's your turn!");
+            alert.setHeaderText("Congratulation: " + "YOU WIN! " + color);
+            alert.setContentText(color2 + ", now it's your turn!");
             alert.showAndWait().ifPresent(rs -> {
                 if (rs == ButtonType.OK) {
                     System.out.println("Pressed OK.");
