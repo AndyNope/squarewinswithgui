@@ -129,7 +129,7 @@ public class SquareWins {
                                 setDrawPoints(getNotCommonPointA(), 1);
                                 setDrawPoints(cornerPoint, 2);
                                 setDrawPoints(getNotCommenPointB(), 3);
-                               
+                                
                                 //System.exit(0);
                                 System.err.println("Cornerpoint: " + getXandY(cornerPoint));
 
@@ -145,8 +145,8 @@ public class SquareWins {
                                 System.out.println("");
                                 System.out.println("");
                                 System.out.println("");
+                                
                                 //Set the Points to draw
-
                                 setDrawPoints(getCommonPoint(), 0);
                                 setDrawPoints(getNotCommonPointA(), 1);
                                 setDrawPoints(cornerPoint, 2);

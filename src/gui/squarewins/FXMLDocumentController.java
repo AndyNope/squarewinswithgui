@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.AnchorPane;
@@ -35,8 +36,11 @@ public class FXMLDocumentController implements Initializable {
 
     private boolean blue = true; //true=blue | false=red
     private RadioButton[] allPoints;
+    private int score1, score2;
 
     private ArrayList<Line> lines = new ArrayList<Line>();
+    @FXML
+    private Label p1,p2;
     @FXML
     private AnchorPane anchPane;
     @FXML
@@ -98,7 +102,7 @@ public class FXMLDocumentController implements Initializable {
 
     public void createField() {
         anchPane = new AnchorPane();
-
+        
         System.out.println(this.anchPane);
         createPoint(rb1);
         createPoint(rb2);
@@ -141,6 +145,8 @@ public class FXMLDocumentController implements Initializable {
         color.setStyle("-fx-mark-color: blue;");
         color.setSelected(true);
         createField();
+        p1.setText("Player 1:");
+        p2.setText("Player 2:");
     }
 
     @FXML
@@ -162,6 +168,8 @@ public class FXMLDocumentController implements Initializable {
                 source.setDisable(true);
                 sw.updateVectors();
                 if (sw.checkwin().equals("blue")) {
+                    score1++;
+                    p1.setText("Player1: " + score1);
                     drawLine();
                     msg("BLUE", "RED");
                     resetGame();
@@ -178,6 +186,8 @@ public class FXMLDocumentController implements Initializable {
                 sw.updateVectors();
                 if (sw.checkwin().equals("red")) {
                     drawLine();
+                    score2++;
+                    p2.setText("Player2: " + score2);
                     msg("RED", "BLUE");
                     resetGame();
                 }
@@ -207,7 +217,7 @@ public class FXMLDocumentController implements Initializable {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Win!");
         alert.setHeaderText("Congratulation: " + "YOU WIN! " + color);
-        alert.setContentText(color2 + ", now it's your turn! The field is being deleted.");
+        alert.setContentText(color2 + ", now it's your turn!");
 
         alert.showAndWait().ifPresent(rs -> {
             if (rs == ButtonType.OK) {
@@ -218,7 +228,7 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void go(ActionEvent event) {
+    private void replay(ActionEvent event) {
         resetGame();
     }
 
@@ -226,18 +236,25 @@ public class FXMLDocumentController implements Initializable {
     private void help(ActionEvent event) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Instruction!");
-        alert.setHeaderText("");
-        alert.setContentText("Thank you for playing \"SQUARE WINS\" Insired by \"https://wild.maths.org/creating-squares\"" );
+        alert.setHeaderText("Thank you for playing \"SQUARE WINS\" Insired by \"https://wild.maths.org/creating-squares\"" );
+        alert.setContentText("Goal: Draw a square and you win. \n"
+                + "A quare has 4 equals edges and 4 right angles.\n\n\n"
+                + "Made by Andy Bui, Ramin Farsinejad and Adel Patkovic");
+        alert.setResizable(false);
         
         alert.showAndWait().ifPresent(rs -> {
             if (rs == ButtonType.OK) {
-                System.out.println("Pressed OK.");
+                System.out.println("-Left Help-");
             }
         });
     }
 
     @FXML
     private void reset(ActionEvent event) {
+        score1 = 0;
+        score2 = 0;
+        p1.setText("Player 1:");
+        p2.setText("Player 2:");
         resetGame();
     }
 
@@ -248,8 +265,6 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void drawLine() throws InterruptedException {
-//
-//        if (sw.checkwin().equals("blue")) {
         updateWinPoints();
         for (int i = 0; i < winPoints.size(); i++) {
             point = winPoints.get(i);
@@ -261,18 +276,6 @@ public class FXMLDocumentController implements Initializable {
             lines.add(new Line(point.getX() + 9, point.getY() + 9, nextPoint.getX() + 9, nextPoint.getY() + 9));
             System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
         }
-//        } else {
-//            for (int i = 0; i < redPoints.size(); i++) {
-//                point = redPoints.get(i);
-//                if (i != redPoints.size() - 1) {
-//                    nextPoint = redPoints.get(i + 1);
-//                } else {
-//                    nextPoint = redPoints.get(0);
-//                }
-//                lines.add(new Line(point.getX() + 9, point.getY() + 9, nextPoint.getX() + 9, nextPoint.getY() + 9));
-//                System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
-//            }
-//        }
 
         addLineToGridPane();
     }
