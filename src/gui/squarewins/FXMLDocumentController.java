@@ -29,7 +29,6 @@ import javafx.scene.shape.Line;
  */
 public class FXMLDocumentController implements Initializable {
 
-
     private ArrayList<Point> winPoints = new ArrayList<>();
     private Point point, nextPoint;
     private SquareWins sw = new SquareWins();
@@ -96,8 +95,8 @@ public class FXMLDocumentController implements Initializable {
     private void createPoint(RadioButton rbutton) {
         rbutton.setUserData(new Point(rbutton.getLayoutX(), rbutton.getLayoutY()));
     }
-    
-    public void createField(){
+
+    public void createField() {
         anchPane = new AnchorPane();
 
         System.out.println(this.anchPane);
@@ -160,7 +159,6 @@ public class FXMLDocumentController implements Initializable {
                 System.out.println("blue");
                 sw.addPoint(new ch.kbw.Model.Point(x, y, true));
 
-
                 source.setDisable(true);
                 sw.updateVectors();
                 if (sw.checkwin().equals("blue")) {
@@ -188,7 +186,7 @@ public class FXMLDocumentController implements Initializable {
             }
 
         }
-        
+
     }
 
     //maybe place method into go() method --> rename go() to restart()
@@ -221,7 +219,26 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void go(ActionEvent event) {
-             resetGame();
+        resetGame();
+    }
+
+    @FXML
+    private void help(ActionEvent event) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Instruction!");
+        alert.setHeaderText("");
+        alert.setContentText("Thank you for playing \"SQUARE WINS\" Insired by \"https://wild.maths.org/creating-squares\"" );
+        
+        alert.showAndWait().ifPresent(rs -> {
+            if (rs == ButtonType.OK) {
+                System.out.println("Pressed OK.");
+            }
+        });
+    }
+
+    @FXML
+    private void reset(ActionEvent event) {
+        resetGame();
     }
 
     public void updateWinPoints() {
