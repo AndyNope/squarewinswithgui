@@ -9,7 +9,10 @@ import ch.kbw.Model.SquareWins;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -198,6 +201,17 @@ public class FXMLDocumentController implements Initializable {
         }
 
     }
+    
+    public void removeLines(){
+        //delete all lines from anchorpane
+        ArrayList<Node> deleteList = new ArrayList<>();
+        for (Node c : Main.root.getChildren()) {
+            if (c.getTypeSelector().equals("Line")) {
+                deleteList.add(c);
+            }
+        }
+        Main.root.getChildren().removeAll(deleteList);
+    }
 
     //maybe place method into go() method --> rename go() to restart()
     public void resetGame() {
@@ -205,14 +219,16 @@ public class FXMLDocumentController implements Initializable {
             rb.setDisable(false);
             rb.setSelected(false);
         }
+        removeLines();
         //Main.root.getChildren().remove(lines);
         lines.clear();
         winPoints.clear();
         sw.reset();
         createField();
+        
     }
 
-    public void msg(String color, String color2) throws InterruptedException {
+    public void msg(String color, String color2) {
 
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Win!");
@@ -222,9 +238,26 @@ public class FXMLDocumentController implements Initializable {
         alert.showAndWait().ifPresent(rs -> {
             if (rs == ButtonType.OK) {
                 System.out.println("Pressed OK.");
+
+                Task<Void> sleeper = new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        try {
+                            Thread.sleep(1200);
+                        } catch (InterruptedException e) {
+                        }
+                        return null;
+                    }
+                };
+                sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                    @Override
+                    public void handle(WorkerStateEvent event) {
+                        resetGame();
+                    }
+                });
+                new Thread(sleeper).start();
             }
         });
-        Thread.sleep(800);
     }
 
     @FXML

@@ -5,11 +5,9 @@
  */
 package ch.kbw.Model;
 
-import gui.squarewins.Main;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.Node;
 
 /**
  *
@@ -608,15 +606,6 @@ public class SquareWins {
         aLength = RESVECT;
         //length of the second vector
         bLength = RESVECT;
-
-        //delete all lines from anchorpane
-        ArrayList<Node> deleteList = new ArrayList<>();
-        for (Node c : Main.root.getChildren()) {
-            if (c.getTypeSelector().equals("Line")) {
-                deleteList.add(c);
-            }
-        }
-        Main.root.getChildren().removeAll(deleteList);
 
     }
 }

@@ -9,40 +9,40 @@
 
 <AnchorPane fx:id="anchPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="272.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.squarewins.FXMLDocumentController">
    <children>
-      <RadioButton fx:id="rb1" layoutX="86.0" layoutY="87.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb2" layoutX="106.0" layoutY="87.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb3" layoutX="126.0" layoutY="87.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb4" layoutX="146.0" layoutY="87.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb5" layoutX="166.0" layoutY="87.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
+      <RadioButton fx:id="rb1" layoutX="60.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb2" layoutX="90.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb3" layoutX="120.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb4" layoutX="150.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb5" layoutX="180.0" layoutY="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
       
-      <RadioButton fx:id="rb6" layoutX="86.0" layoutY="107.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb7" layoutX="106.0" layoutY="107.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb8" layoutX="126.0" layoutY="107.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />    
-      <RadioButton fx:id="rb9" layoutX="146.0" layoutY="107.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb10" layoutX="166.0" layoutY="107.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
+      <RadioButton fx:id="rb6" layoutX="60.0" layoutY="90.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb7" layoutX="90.0" layoutY="90.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb8" layoutX="120.0" layoutY="90.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />    
+      <RadioButton fx:id="rb9" layoutX="150.0" layoutY="90.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb10" layoutX="180.0" layoutY="90.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
       
-      <RadioButton fx:id="rb11" layoutX="86.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb12" layoutX="106.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />      
-      <RadioButton fx:id="rb13" layoutX="126.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb14" layoutX="146.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb15" layoutX="166.0" layoutY="127.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
+      <RadioButton fx:id="rb11" layoutX="60.0" layoutY="120.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb12" layoutX="90.0" layoutY="120.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />      
+      <RadioButton fx:id="rb13" layoutX="120.0" layoutY="120.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb14" layoutX="150.0" layoutY="120.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb15" layoutX="180.0" layoutY="120.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
       
-      <RadioButton fx:id="rb16" layoutX="86.0" layoutY="147.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb17" layoutX="106.0" layoutY="147.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb18" layoutX="126.0" layoutY="147.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />    
-      <RadioButton fx:id="rb19" layoutX="146.0" layoutY="147.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb20" layoutX="166.0" layoutY="147.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
+      <RadioButton fx:id="rb16" layoutX="60.0" layoutY="150.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb17" layoutX="90.0" layoutY="150.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb18" layoutX="120.0" layoutY="150.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />    
+      <RadioButton fx:id="rb19" layoutX="150.0" layoutY="150.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb20" layoutX="180.0" layoutY="150.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
       
-      <RadioButton fx:id="rb21" layoutX="86.0" layoutY="167.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb22" layoutX="106.0" layoutY="167.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb23" layoutX="126.0" layoutY="167.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />    
-      <RadioButton fx:id="rb24" layoutX="146.0" layoutY="167.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
-      <RadioButton fx:id="rb25" layoutX="166.0" layoutY="167.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
+      <RadioButton fx:id="rb21" layoutX="60.0" layoutY="180.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb22" layoutX="90.0" layoutY="180.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb23" layoutX="120.0" layoutY="180.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />    
+      <RadioButton fx:id="rb24" layoutX="150.0" layoutY="180.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
+      <RadioButton fx:id="rb25" layoutX="180.0" layoutY="180.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
       
-      <RadioButton fx:id="color" layoutX="200.0" layoutY="167.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
+      <RadioButton fx:id="color" layoutX="220.0" layoutY="167.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" scaleX="2.0" scaleY="2.0" scaleZ="2.0" text="" />
       
-      <Button layoutX="125.0" layoutY="220.0" mnemonicParsing="false" onAction="#replay" text="Restart" />
-      <Button layoutX="100.0" layoutY="220.0" mnemonicParsing="false" onAction="#help" text="?" />
+      <Button layoutX="60.0" layoutY="220.0" mnemonicParsing="false" onAction="#replay" text="Restart" />
+      <Button layoutX="53.0" layoutY="220.0" mnemonicParsing="false" onAction="#help" text="?" />
       <Button layoutX="180.0" layoutY="220.0" mnemonicParsing="false" onAction="#reset" text="Reset" />
       <Label fx:id="p1" layoutX="40.0" layoutY="29.0" text="Label" />
       <Label fx:id="p2" layoutX="180.0" layoutY="29.0" text="Label" />
