@@ -29,8 +29,7 @@ import javafx.scene.shape.Line;
  */
 public class FXMLDocumentController implements Initializable {
 
-    private ArrayList<Point> bluePoints = new ArrayList<>();
-    private ArrayList<Point> redPoints = new ArrayList<>();
+
     private ArrayList<Point> winPoints = new ArrayList<>();
     private Point point, nextPoint;
     private SquareWins sw = new SquareWins();
@@ -91,14 +90,14 @@ public class FXMLDocumentController implements Initializable {
     private RadioButton rb24;
     @FXML
     private RadioButton rb25;
+    @FXML
+    private RadioButton color;
 
-    private static void createPoint(RadioButton rbutton) {
+    private void createPoint(RadioButton rbutton) {
         rbutton.setUserData(new Point(rbutton.getLayoutX(), rbutton.getLayoutY()));
     }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
+    
+    public void createField(){
         anchPane = new AnchorPane();
 
         System.out.println(this.anchPane);
@@ -127,7 +126,8 @@ public class FXMLDocumentController implements Initializable {
         createPoint(rb23);
         createPoint(rb24);
         createPoint(rb25);
-
+        createPoint(color);
+        color.setDisable(true);
         allPoints = new RadioButton[]{
             rb1, rb2, rb3, rb4, rb5,
             rb6, rb7, rb8, rb9, rb10,
@@ -135,6 +135,13 @@ public class FXMLDocumentController implements Initializable {
             rb16, rb17, rb18, rb19, rb20,
             rb21, rb22, rb23, rb24, rb25
         };
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        color.setStyle("-fx-mark-color: blue;");
+        color.setSelected(true);
+        createField();
     }
 
     @FXML
@@ -149,10 +156,11 @@ public class FXMLDocumentController implements Initializable {
 
             if (blue) {
                 source.setStyle("-fx-mark-color: blue;");
+                color.setStyle("-fx-mark-color: red;");
                 System.out.println("blue");
                 sw.addPoint(new ch.kbw.Model.Point(x, y, true));
 
-                bluePoints.add(point);
+
                 source.setDisable(true);
                 sw.updateVectors();
                 if (sw.checkwin().equals("blue")) {
@@ -164,10 +172,10 @@ public class FXMLDocumentController implements Initializable {
                 blue = false;
             } else {
                 source.setStyle("-fx-mark-color: red;");
+                color.setStyle("-fx-mark-color: blue;");
                 System.out.println("red");
                 sw.addPoint(new ch.kbw.Model.Point(x, y, false));
 
-                redPoints.add(point);
                 source.setDisable(true);
                 sw.updateVectors();
                 if (sw.checkwin().equals("red")) {
@@ -180,6 +188,7 @@ public class FXMLDocumentController implements Initializable {
             }
 
         }
+        
     }
 
     //maybe place method into go() method --> rename go() to restart()
@@ -188,10 +197,11 @@ public class FXMLDocumentController implements Initializable {
             rb.setDisable(false);
             rb.setSelected(false);
         }
-        bluePoints.clear();
-        redPoints.clear();
+        //Main.root.getChildren().remove(lines);
+        lines.clear();
         winPoints.clear();
         sw.reset();
+        createField();
     }
 
     public void msg(String color, String color2) throws InterruptedException {
@@ -211,7 +221,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void go(ActionEvent event) {
-
+             resetGame();
     }
 
     public void updateWinPoints() {
@@ -223,6 +233,7 @@ public class FXMLDocumentController implements Initializable {
     private void drawLine() throws InterruptedException {
 //
 //        if (sw.checkwin().equals("blue")) {
+        updateWinPoints();
         for (int i = 0; i < winPoints.size(); i++) {
             point = winPoints.get(i);
             if (i != winPoints.size() - 1) {

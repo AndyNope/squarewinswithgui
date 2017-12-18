@@ -37,7 +37,9 @@
       <RadioButton fx:id="rb24" layoutX="146.0" layoutY="167.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
       <RadioButton fx:id="rb25" layoutX="166.0" layoutY="167.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
       
-      <Button layoutX="178.0" layoutY="220.0" mnemonicParsing="false" onAction="#go" text="go" />
+      <RadioButton fx:id="color" layoutX="200.0" layoutY="167.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pointSelectionAction" text="" />
+      
+      <Button layoutX="178.0" layoutY="220.0" mnemonicParsing="false" onAction="#go" text="Reset" />
       
    </children>
 </AnchorPane>

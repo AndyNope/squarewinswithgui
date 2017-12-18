@@ -125,10 +125,11 @@ public class SquareWins {
                                 System.out.println("");
                                 System.out.println("");
                                 //Set the Points to draw
-                                setDrawPoints(getCommonPoint(), 1);
-                                setDrawPoints(notCommenPointB, 2);
-                                setDrawPoints(cornerPoint, 0);
-                                setDrawPoints(notCommonPointA, 3);
+                                setDrawPoints(getCommonPoint(), 0);
+                                setDrawPoints(getNotCommonPointA(), 1);
+                                setDrawPoints(cornerPoint, 2);
+                                setDrawPoints(getNotCommenPointB(), 3);
+                               
                                 //System.exit(0);
                                 System.err.println("Cornerpoint: " + getXandY(cornerPoint));
 
@@ -146,10 +147,10 @@ public class SquareWins {
                                 System.out.println("");
                                 //Set the Points to draw
 
-                                setDrawPoints(getCommonPoint(), 1);
-                                setDrawPoints(notCommenPointB, 2);
-                                setDrawPoints(cornerPoint, 0);
-                                setDrawPoints(notCommonPointA, 3);
+                                setDrawPoints(getCommonPoint(), 0);
+                                setDrawPoints(getNotCommonPointA(), 1);
+                                setDrawPoints(cornerPoint, 2);
+                                setDrawPoints(getNotCommenPointB(), 3);
                                 //System.exit(0);
                                 return "red";
                             }
@@ -182,6 +183,23 @@ public class SquareWins {
         this.drawPoints[array] = drawPoints;
     }
 
+    public Point getNotCommonPointA() {
+        return notCommonPointA;
+    }
+
+    public void setNotCommonPointA(Point notCommonPointA) {
+        this.notCommonPointA = notCommonPointA;
+    }
+
+    public Point getNotCommenPointB() {
+        return notCommenPointB;
+    }
+
+    public void setNotCommenPointB(Point notCommenPointB) {
+        this.notCommenPointB = notCommenPointB;
+    }
+
+    
     //Addition of the 2 Vectors
     private Point getCornerpoint(Point common, Vector vA, Vector vB) {
         Point point = null, pA, pB;;
@@ -191,17 +209,18 @@ public class SquareWins {
             pA = vA.getPointB();
         } else {
             pA = vA.getPointA();
-            notCommonPointA = pA;
         }
+        
         if (checkIfPointsAreEquals(vB.getPointA(), common)) {
             pB = vB.getPointB();
         } else {
             pB = vB.getPointA();
-            notCommenPointB = pB;
         }
         xLenght = pB.getX() - common.getX();
         yLenght = pB.getY() - common.getY();
         point = new Point(pA.getX() + xLenght, pA.getY() + yLenght);
+        setNotCommonPointA(pA);
+        setNotCommenPointB(pB);
         return point;
     }
 
