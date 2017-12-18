@@ -105,7 +105,6 @@ public class FXMLDocumentController implements Initializable {
 
     public void createField() {
         anchPane = new AnchorPane();
-        
         System.out.println(this.anchPane);
         createPoint(rb1);
         createPoint(rb2);
@@ -150,6 +149,12 @@ public class FXMLDocumentController implements Initializable {
         createField();
         p1.setText("Player 1:");
         p2.setText("Player 2:");
+        p1.setTextFill(Color.BLUE);
+        p2.setTextFill(Color.RED);
+        for(RadioButton rad : allPoints) {
+            rad.setDisable(false);
+            rad.setSelected(false);
+        }
     }
 
     @FXML
@@ -159,7 +164,7 @@ public class FXMLDocumentController implements Initializable {
 
         if (source.isSelected()) {
 
-            int x = (int) ((point.getX() - 86) / 20), y = (int) ((point.getY() - 87) / 20);
+            int x = (int) ((point.getX() - 60) / 30), y = (int) ((point.getY() - 60) / 30);
             System.out.println("Koordinate: " + x + "|" + y);
 
             if (blue) {
@@ -175,7 +180,6 @@ public class FXMLDocumentController implements Initializable {
                     p1.setText("Player1: " + score1);
                     drawLine();
                     msg("BLUE", "RED");
-                    resetGame();
                 }
                 //algorithm(red);
                 blue = false;
@@ -192,7 +196,6 @@ public class FXMLDocumentController implements Initializable {
                     score2++;
                     p2.setText("Player2: " + score2);
                     msg("RED", "BLUE");
-                    resetGame();
                 }
                 //algorithm(blue); 
                 blue = true;
@@ -212,12 +215,22 @@ public class FXMLDocumentController implements Initializable {
         }
         Main.root.getChildren().removeAll(deleteList);
     }
+    public void diableAutoFocus(){
+        
+        ArrayList<Node> rb = new ArrayList<>();
+        for (Node c : Main.root.getChildren()) {
+            if (c.getTypeSelector().equals("RadioButton")) {
+                rb.add(c);
+            }
+        }
+    }
 
     //maybe place method into go() method --> rename go() to restart()
     public void resetGame() {
         for (RadioButton rb : allPoints) {
             rb.setDisable(false);
             rb.setSelected(false);
+            rb.setMnemonicParsing(false);
         }
         removeLines();
         //Main.root.getChildren().remove(lines);
@@ -293,7 +306,7 @@ public class FXMLDocumentController implements Initializable {
 
     public void updateWinPoints() {
         for (int i = 0; i < sw.getDrawPoints().length; i++) {
-            winPoints.add(new Point(1.0 * (sw.getDrawPoints()[i].getX() * 20 + 86), 1.0 * (sw.getDrawPoints()[i].getY() * 20 + 87)));
+            winPoints.add(new Point(1.0 * (sw.getDrawPoints()[i].getX() * 30 + 60), 1.0 * (sw.getDrawPoints()[i].getY() * 30 + 60)));
         }
     }
 
@@ -306,7 +319,7 @@ public class FXMLDocumentController implements Initializable {
             } else {
                 nextPoint = winPoints.get(0);
             }
-            lines.add(new Line(point.getX() + 9, point.getY() + 9, nextPoint.getX() + 9, nextPoint.getY() + 9));
+            lines.add(new Line(point.getX() + 6, point.getY() + 9, nextPoint.getX() + 6, nextPoint.getY() + 9));
             System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
         }
 
