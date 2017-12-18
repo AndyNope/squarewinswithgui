@@ -3,6 +3,7 @@ package gui.squarewins;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -21,7 +22,7 @@ public class Main extends Application {
 //        Group root = new Group();
 
         Scene scene = new Scene(root);
-
+        stage.setTitle("Square Wins");
         stage.setScene(scene);
         stage.show();
 
