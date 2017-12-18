@@ -23,7 +23,7 @@ public class SquareWins {
     private boolean player = true;
 
     //set points
-    private Point points[][], commonPoint;
+    private Point points[][], commonPoint, notCommonPointA, notCommenPointB;
     //ArrayList of the setted vectors
     private ArrayList<Vector> vectorsOfPlayerBlue = new ArrayList<>();
     private ArrayList<Vector> vectorsOfPlayerRed = new ArrayList<>();
@@ -125,10 +125,10 @@ public class SquareWins {
                                 System.out.println("");
                                 System.out.println("");
                                 //Set the Points to draw
-                                setDrawPoints(cornerPoint, 0);
                                 setDrawPoints(getCommonPoint(), 1);
-                                setDrawPoints(getNotCommenPoint(vectors.get(i), getCommonPoint()), 2);
-                                setDrawPoints(getNotCommenPoint(vectors.get(j), getCommonPoint()), 3);
+                                setDrawPoints(notCommenPointB, 2);
+                                setDrawPoints(cornerPoint, 0);
+                                setDrawPoints(notCommonPointA, 3);
                                 //System.exit(0);
                                 System.err.println("Cornerpoint: " + getXandY(cornerPoint));
 
@@ -145,10 +145,11 @@ public class SquareWins {
                                 System.out.println("");
                                 System.out.println("");
                                 //Set the Points to draw
-                                setDrawPoints(cornerPoint, 0);
+
                                 setDrawPoints(getCommonPoint(), 1);
-                                setDrawPoints(getNotCommenPoint(vectors.get(i), getCommonPoint()), 2);
-                                setDrawPoints(getNotCommenPoint(vectors.get(j), getCommonPoint()), 3);
+                                setDrawPoints(notCommenPointB, 2);
+                                setDrawPoints(cornerPoint, 0);
+                                setDrawPoints(notCommonPointA, 3);
                                 //System.exit(0);
                                 return "red";
                             }
@@ -190,11 +191,13 @@ public class SquareWins {
             pA = vA.getPointB();
         } else {
             pA = vA.getPointA();
+            notCommonPointA = pA;
         }
         if (checkIfPointsAreEquals(vB.getPointA(), common)) {
             pB = vB.getPointB();
         } else {
             pB = vB.getPointA();
+            notCommenPointB = pB;
         }
         xLenght = pB.getX() - common.getX();
         yLenght = pB.getY() - common.getY();
@@ -586,16 +589,15 @@ public class SquareWins {
         aLength = RESVECT;
         //length of the second vector
         bLength = RESVECT;
-        
+
         //delete all lines from anchorpane
         ArrayList<Node> deleteList = new ArrayList<>();
-        for(Node c : Main.root.getChildren()){
-            if(c.getTypeSelector().equals("Line")){
+        for (Node c : Main.root.getChildren()) {
+            if (c.getTypeSelector().equals("Line")) {
                 deleteList.add(c);
             }
         }
         Main.root.getChildren().removeAll(deleteList);
-        
 
     }
 }

@@ -31,9 +31,10 @@ public class FXMLDocumentController implements Initializable {
 
     private ArrayList<Point> bluePoints = new ArrayList<>();
     private ArrayList<Point> redPoints = new ArrayList<>();
+    private ArrayList<Point> winPoints = new ArrayList<>();
     private Point point, nextPoint;
     private SquareWins sw = new SquareWins();
-   
+
     private boolean blue = true; //true=blue | false=red
     private RadioButton[] allPoints;
 
@@ -180,12 +181,16 @@ public class FXMLDocumentController implements Initializable {
 
         }
     }
+
     //maybe place method into go() method --> rename go() to restart()
     public void resetGame() {
         for (RadioButton rb : allPoints) {
             rb.setDisable(false);
             rb.setSelected(false);
         }
+        bluePoints.clear();
+        redPoints.clear();
+        winPoints.clear();
         sw.reset();
     }
 
@@ -209,39 +214,37 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
-    private void drawLine() throws InterruptedException {
-        //Andys Funktion auskommentiert
-        /*lines.add(new Line(sw.getDrawPoints()[0].getX() + 9, sw.getDrawPoints()[0].getY() + 9, sw.getDrawPoints()[1].getX() + 9, sw.getDrawPoints()[1].getY() + 9));
-        lines.add(new Line(sw.getDrawPoints()[1].getX() + 9, sw.getDrawPoints()[1].getY() + 9, sw.getDrawPoints()[2].getX() + 9, sw.getDrawPoints()[2].getY() + 9));
-        lines.add(new Line(sw.getDrawPoints()[2].getX() + 9, sw.getDrawPoints()[2].getY() + 9, sw.getDrawPoints()[3].getX() + 9, sw.getDrawPoints()[3].getY() + 9));
-        lines.add(new Line(sw.getDrawPoints()[3].getX() + 9, sw.getDrawPoints()[3].getY() + 9, sw.getDrawPoints()[0].getX() + 9, sw.getDrawPoints()[0].getY() + 9));
-        //System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
-
-        selectedPoints.clear();
-        addLineToGridPane();*/
-        if (sw.checkwin().equals("blue")) {
-            for (int i = 0; i < bluePoints.size(); i++) {
-                point = bluePoints.get(i);
-                if (i != bluePoints.size() - 1) {
-                    nextPoint = bluePoints.get(i + 1);
-                } else {
-                    nextPoint = bluePoints.get(0);
-                }
-                lines.add(new Line(point.getX() + 9, point.getY() + 9, nextPoint.getX() + 9, nextPoint.getY() + 9));
-                System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
-            }
-        } else {
-            for (int i = 0; i < redPoints.size(); i++) {
-                point = redPoints.get(i);
-                if (i != redPoints.size() - 1) {
-                    nextPoint = redPoints.get(i + 1);
-                } else {
-                    nextPoint = redPoints.get(0);
-                }
-                lines.add(new Line(point.getX() + 9, point.getY() + 9, nextPoint.getX() + 9, nextPoint.getY() + 9));
-                System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
-            }
+    public void updateWinPoints() {
+        for (int i = 0; i < sw.getDrawPoints().length; i++) {
+            winPoints.add(new Point(1.0 * (sw.getDrawPoints()[i].getX() * 20 + 86), 1.0 * (sw.getDrawPoints()[i].getY() * 20 + 87)));
         }
+    }
+
+    private void drawLine() throws InterruptedException {
+//
+//        if (sw.checkwin().equals("blue")) {
+        for (int i = 0; i < winPoints.size(); i++) {
+            point = winPoints.get(i);
+            if (i != winPoints.size() - 1) {
+                nextPoint = winPoints.get(i + 1);
+            } else {
+                nextPoint = winPoints.get(0);
+            }
+            lines.add(new Line(point.getX() + 9, point.getY() + 9, nextPoint.getX() + 9, nextPoint.getY() + 9));
+            System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
+        }
+//        } else {
+//            for (int i = 0; i < redPoints.size(); i++) {
+//                point = redPoints.get(i);
+//                if (i != redPoints.size() - 1) {
+//                    nextPoint = redPoints.get(i + 1);
+//                } else {
+//                    nextPoint = redPoints.get(0);
+//                }
+//                lines.add(new Line(point.getX() + 9, point.getY() + 9, nextPoint.getX() + 9, nextPoint.getY() + 9));
+//                System.out.println(point.getX() + " " + point.getY() + " " + nextPoint.getX() + " " + nextPoint.getY());
+//            }
+//        }
 
         addLineToGridPane();
     }
